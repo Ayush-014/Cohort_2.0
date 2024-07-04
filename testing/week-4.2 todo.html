@@ -67,6 +67,21 @@
       parent.appendChild(createChild(title, description, taskId++));
     }
 
+    function updateDomAccToState(state) {
+        const parent = document.getElementById('display');
+        parent.innerHTML = "";
+        for(let i=0; i<state.length; i++) {
+            const child = createChild(state[i].title,state[i].description,taskId++);
+            parent.appendChild(child);
+        }
+    }
+
+    window.setInterval(async function() {
+        const data = await fetch("https://sum-server.100xdevs.com/todos");
+        const json = await data.json();
+        updateDomAccToState(json.todos)
+    },5000)
+
     // const title = document.getElementById('title');
     // const desc = document.getElementById('desc');
     // const add = document.querySelector('button');
