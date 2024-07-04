@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO</title>
+    <style>
+        body{
+            margin: 0px 0px;
+            padding: 6rem;
+            border: 5px solid rgb(0, 0, 0);
+            background-color: rgb(255, 127, 127);
+            height: 100vh;
+        }
+        #main{
+            margin-left: 27rem;
+        }
+        #display{
+            margin-top: 2rem;
+            border: 2px solid orange;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .taskStyle{
+            border: 1px solid rgb(47, 102, 59);
+            border-radius: 4px;
+            background-color: rgb(231, 196, 201);
+            margin: 4px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h2>TODO</h2>
+        <input id="title" type="text" placeholder="title"></input> <br><br>
+        <textarea id="desc" type="text" placeholder="desc"></textarea> <br><br>
+        <button onclick="addTodo()">ADD</button>
+    </div>
+    <div id="display"></div>
+
+<script>
+    let taskId = 1;
+
+    function createChild(title, description, id) {
+      const child = document.createElement("div");
+      const firstGrandParent = document.createElement("div");
+      firstGrandParent.innerHTML = title;
+      const secondGrandParent = document.createElement("div");
+      secondGrandParent.innerHTML = description;
+      const thirdGrandParent = document.createElement("button");
+      thirdGrandParent.innerHTML = "Mark as done";
+      thirdGrandParent.setAttribute("onclick", `markAsDone(${id})`);
+      child.appendChild(firstGrandParent);
+      child.appendChild(secondGrandParent);
+      child.appendChild(thirdGrandParent)
+      child.setAttribute("id", id);
+      return child;
+    }
+    function addTodo() {
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const parent =  document.getElementById('display');
+
+      parent.appendChild(createChild(title, description, taskId++));
+    }
+
+    // const title = document.getElementById('title');
+    // const desc = document.getElementById('desc');
+    // const add = document.querySelector('button');
+    // const display = document.getElementById('display');
+    // add.addEventListener('click',() => {
+    //     if (!title.value.trim()) {
+    //             alert("Please enter a title for the task.");
+    //             return;
+    //     }
+
+    //     const newTask = document.createElement('div');
+    //     newTask.classList.add('taskStyle');
+    //     newTask.setAttribute("id",`${taskId}`);
+
+    //     const newTitle = document.createElement('h4');
+    //     newTitle.textContent = `${title.value}`;
+    //     newTask.appendChild(newTitle);
+        
+    //     const newDesc = document.createElement('p');
+    //     newDesc.textContent = `${desc.value}`;
+    //     newTask.appendChild(newDesc);
+        
+    //     const del = document.createElement('button');
+    //     del.textContent = "delete";
+    //     del.addEventListener('click',(e) => {
+    //         e.target.parentElement.remove();
+    //     })
+    //     newTask.appendChild(del);
+        
+    //     const mark = document.createElement('button');
+    //     mark.textContent = "Mark as done";
+    //     mark.addEventListener('click',(e) => {
+    //         e.target.textContent = "Done!";
+    //     })
+    //     newTask.appendChild(mark);
+
+    //     display.appendChild(newTask);
+    //     // title.value = "";
+    //     desc.value = "";
+    //     return;
+    // });
+
+    
+</script>
+</body>
+</html>

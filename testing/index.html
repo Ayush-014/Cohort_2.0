@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="h1">DOM</h1>
+    <h3 class="h3">testing basic DOM manipulation here</h3>
+    <p class="p1">some para</p>
+    <button class="button">click me</button>
+    <p id="display"></p>
+
+    <h1>CALC</h1>
+    <h3>evaluates simple calculation</h3>
+    <input onInput="calc()" id="firstNumber" placeholder="First Number"></input>
+    <input onInput="calc()" id="secondNumber" placeholder="Second Number"></input>
+    <input id="calcDisplay"></input>
+
+    <h1>DEBOUNCING</h1>
+    <h3>trying implementation of debouncing</h3>
+    <input onInput="debounce()" id="first" placeholder="First Number"></input>
+    <input onInput="debounce()" id="second" placeholder="Second Number"></input>
+    <div id="debouncedisplay"></div>
+</body>
+
+<script>
+    const h1 = document.getElementsByClassName('h1');
+    const h3 = document.querySelector('.h3');
+        const p1 = document.getElementsByClassName('p1');
+        const button = document.getElementsByTagName('button')[0];
+        const display = document.getElementById('display');
+        let count = 0;
+        const hovertext = document.createElement("p");
+        let hover = 0;
+
+        h1[0].style.backgroundColor = "blue";
+        h3.style.backgroundColor = "green";
+        hovertext.textContent = `hovered ${hover++} times`;
+        button.addEventListener("mouseover", () => {
+            console.log("hovered added");
+            button.appendChild(hovertext);
+        })
+        button.addEventListener("mouseout", () => {
+            console.log("hovered removed");
+            button.removeChild(hovertext);
+        })
+        // display.innerHTML = "<p>p1 this side</p> <p>p2 this side</p>"
+        // button.onclick = function() {
+        //     console.log("myfunction called");
+        //     button.innerText = `clicked ${count++} times`;
+        // };
+        // console.log(button[0])
+        
+        const firstNumber = document.getElementById("firstNumber");
+        const secondNumber = document.getElementById("secondNumber");
+        const calcDisplay = document.getElementById("calcDisplay");
+        function calc() {
+            calcDisplay.placeholder = parseInt(firstNumber.value) + parseInt(secondNumber.value);
+        }
+
+        const first = document.getElementById('first');
+        const second = document.getElementById('second');
+        const debounceDisplay = document.getElementById('debouncedisplay');
+        let timeout;
+        async function debounce() {
+            clearTimeout(timeout);
+            timeout = setTimeout( () => {
+                debounceDisplay.textContent = "setTimeout called";
+                console.log(`settimeout called after ${timeout}s`);
+            },1000);
+        }
+    </script>
+</html>
