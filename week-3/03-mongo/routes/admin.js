@@ -6,7 +6,31 @@ const router = Router();
 
 // Admin Routes
 router.post("/signup", async (req, res) => {
-  
+    const username = req.body.username;
+    const password = req.body.password;
+
+    await Admin.create({
+      username: username,
+      password: password
+      // username,
+      // password
+    })
+      .catch( () => {
+        console.log("exception caught at creating Admin")
+      })
+    res.json({
+        msg: "Admin created successfully"
+    })
+
+      // .then( (value) => {
+      //   if(value) {
+      //     res.status(403).json({
+      //         msg: "Already exists as Admin"
+      //     })
+      //   } else {
+      //     res.
+      //   }
+      // })
 });
 
 router.post("/courses", adminMiddleware, async (req, res) => {
