@@ -14,10 +14,13 @@ router.post("/signup", async (req, res) => {
     password
   })
     .catch( () => {
-      console.log("exception caught at creating User")
+      console.log("exception caught at creating User");
+      res.status(403).json({
+        msg: "User creation: Failed"
     })
-  res.json({
-      msg: "User created successfully"
+    })
+  res.status(201).json({
+      msg: "User creation: Successfull"
   })
 });
 
@@ -59,7 +62,7 @@ router.get("/purchasedCourses", userMiddleware, async (req, res) => {
   const user = await User.findOne({
     username: req.headers.username
   });
-  const courses = await Courses.find({
+  const courses = await Course.find({
     _id: {
       "$in": user.purchasedCourses
     }

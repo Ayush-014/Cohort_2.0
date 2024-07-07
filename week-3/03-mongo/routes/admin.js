@@ -16,16 +16,15 @@ router.post("/signup", async (req, res) => {
       // username,
       // password
     })
-    } catch( e ) {
+    res.status(201).json({
+      msg: "Admin created successfully"
+  });
+    } catch {
         console.log("exception caught at creating Admin")
         res.status(500).json({ 
-          msg: "Some Error occured in creating Admin Account", 
-          error: e 
+          msg: "Some Error occured in creating Admin Account"
         });
       }
-    res.status(201).json({
-        msg: "Admin created successfully"
-    });
 });
 
 router.post("/courses", adminMiddleware, async (req, res) => {
@@ -35,6 +34,7 @@ router.post("/courses", adminMiddleware, async (req, res) => {
     const description = req.body.description;
     const price = req.body.price;
     const imageLink = req.body.imageLink;
+    const published = req.body.published;
 
     try{
       const newCourse = await Course.create({
@@ -42,35 +42,33 @@ router.post("/courses", adminMiddleware, async (req, res) => {
         description,
         imageLink,
         price,
-        published: true
+        published
     })
-    } catch( e ) {
+    res.status(201).json({
+      message: 'Course created successfully', 
+      courseId: newCourse.id 
+ })
+    } catch {
         console.log("exception caught at creating course")
         res.status(500).json({ 
-          msg: "Some Error occured in creating course", 
-          error: e 
+          msg: "Some Error occured in creating course"
         });
     }
-    res.status(201).json({
-         message: 'Course created successfully', 
-         courseId: newCourse.id 
-    })
   });
 
 router.get("/courses", adminMiddleware, async (req, res) => {
   // Implement fetching all courses logic
   try{
     const newCourse = await Course.find({});
-  } catch( e ) {
+    res.status(201).json({
+      courses: newCourse
+    })
+  } catch {
     console.log("exception caught at fetching course")
         res.status(500).json({ 
-          msg: "Some Error occured in fetching course", 
-          error: e 
+          msg: "Some Error occured in fetching course"
         });
   }
-  res.status(201).json({
-    courses: newCourse
-  })
 });
 
 module.exports = router;
