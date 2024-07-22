@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function NewTodo() {
+export default function NewTodo(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
@@ -41,6 +41,11 @@ export default function NewTodo() {
                     .catch((err) => {
                       console.log(`error caught during fetch call. Error: ${err}`);
                     })
+                    // props.setTodos([...todos, {
+                    //     title,
+                    //     description,
+                    //     completed: false
+                    // }])
             }} >Add</button>
         </div>
     );

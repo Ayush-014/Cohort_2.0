@@ -6,22 +6,23 @@ import NewTodo from "./components/NewTodo"
 import Todo from "./components/Todo"
 
 function App() {
+  const [todos, setTodos] = useState([]);
 
-  // fetch("http://localhost:3000/todos")
-  //   .then(async (res) => {
-  //     const json = await res.json();
-  //     // console.log(json);
-  //     setTodos(json.todos);
-  //   })
-  //   .catch((err) => {
-  //     console.log(`error caught during fetch call. Error: ${err}`);
-  //   })
+  fetch("http://localhost:3000/todos")
+    .then(async (res) => {
+      const json = await res.json();
+      // console.log(json);
+      setTodos(json.todos);
+    })
+    .catch((err) => {
+      console.log(`error caught during fetch call. Error: ${err}`);
+    })
   
     return (
     <div>
       hi there
-      <NewTodo />
-      {/* <Todo todos={todos}></Todo> */}
+      <NewTodo setTodos={setTodos}/>
+      <Todo todos={todos} ></Todo>
     </div>
   )
 }
