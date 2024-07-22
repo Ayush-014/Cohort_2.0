@@ -6,7 +6,7 @@ const { todoSchema } = require("./db");
 const cors = require("cors");
 const port = 3000;
 
-app.use(express.json());
+app.use(express.json());        //app.use(express.json()) actually checks header whether data is in json or not & only let the json data pass
 app.use(cors());    //any frontend can call this
 // app.use(cors({
 //     origin: "http://localhost:5173"  //only localhost:5173 can call this backend
@@ -54,6 +54,7 @@ app.get("/todos", async (req, res) => {
         });
 
         res.status(200).json({
+            todos: todos,
             incompleteTodos: incompleteTodos,
             completedTodos: completedTodos
         });
