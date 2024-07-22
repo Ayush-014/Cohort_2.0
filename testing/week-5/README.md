@@ -11,4 +11,6 @@ It has following features:
 // put a package.json
         
 // 1. npm init
-// 2. npm install express 
+// 2. npm install express
+// 2. npm install body-parser
+// 2. npm install zod

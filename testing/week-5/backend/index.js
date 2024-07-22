@@ -37,13 +37,20 @@ app.post("/todo", async (req, res) => {
 });
 
 app.get("/todos", async (req, res) => {
+    let completedTodos = [];
+    let incompleteTodos = [];
     try {
-        const todos = await todoSchema.find({
-            completed: false
+        const todos = await todoSchema.find();
+        completedTodos = todos.filter((todo) => {
+            return todo.completed === true;
         });
-        console.log(todos);
+        incompleteTodos = todos.filter((todo) => {
+            return todo.completed === false;
+        });
+
         res.status(200).json({
-            todos: todos
+            incompleteTodos: incompleteTodos,
+            completedTodos: completedTodos
         });
     } catch (err) {
         res.status(500).json({
@@ -65,7 +72,7 @@ app.put("/todoEdit", async (req, res) => {
 
     try {
         await todoSchema.updateOne({
-            _id: updatePayload.id
+            _id: updatePayload._id
         }, {
             completed: true
         });
