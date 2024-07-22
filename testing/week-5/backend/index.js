@@ -3,9 +3,14 @@ const mongoose = require("mongoose");
 const app = express();
 const schema = require("./types");
 const { todoSchema } = require("./db");
+const cors = require("cors");
 const port = 3000;
 
 app.use(express.json());
+app.use(cors());    //any frontend can call this
+// app.use(cors({
+//     origin: "http://localhost:5173"  //only localhost:5173 can call this backend
+// }));
 
 app.post("/todo", async (req, res) => {
     const createPayload = req.body;
