@@ -8,7 +8,16 @@
       let editTodoId;
 
       function addTodoToDom(todo) {
-        
+        const todoElement = document.createElement("div");
+        todoElement.classList.add("todo-item");
+
+        const titleElement = document.createElement("h2");
+        titleElement.textContent=todo.title;
+
+        const descriptionElement = document.createElement("p");
+        descriptionElement.textContent=todo.description;
+
+        const idElement = document.createElement("")
       }
 
       function removeTodoFromDom(todo) {
