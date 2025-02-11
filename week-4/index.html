@@ -17,19 +17,87 @@
         const descriptionElement = document.createElement("p");
         descriptionElement.textContent=todo.description;
 
-        const idElement = document.createElement("")
+        const buttonElement = document.createElement("div");
+        buttonElement.classList.add("buttonContainer");
+
+        const editElement = document.createElement("button");
+        editElement.classList.add("edit");
+        editElement.textContent = "EDIT";
+        editElement.addEventListener("click", () => {
+          editTodoId = todo.id;
+          document.getElementById("title").value = todo.title;
+          document.getElementById("description").value = todo.description;
+        });
+
+        const removeElement = document.createElement("button");
+        removeElement.classList.add("remove");
+        removeElement.textContent = "DELETE";
+        removeElement.addEventListener("click", () => {
+        removeTodoFromDom(todo);
+        deleteTodoFromState(todo.id);
+        updateState(todoState);
+        });
+
+        buttonElement.appendChild(editElement);
+        buttonElement.appendChild(removeElement);
+        todoElement.appendChild(titleElement);
+        todoElement.appendChild(descriptionElement);
+        todoElement.appendChild(buttonElement);
+        //one line
+        document.getElementById("todos").appendChild(todoElement);
       }
 
       function removeTodoFromDom(todo) {
-      
+        let newTodos = [];
+        todoState.forEach(element => {
+          if(element.id != todo.id)
+            newTodos.push(element);
+        });
       }
 
       function updateTodoInDom(oldTodo, newTodo) {
-      
+        const todoElement = document.querySelector(
+          `.todo-item[data-id="${oldTodo.id}"]`
+        );
+        if (todoElement) {
+          todoElement.querySelector("h3").textContent = newTodo.title;
+          todoElement.querySelector("p").textContent = newTodo.description;
+        }
       }
 
       function updateState(newTodos) {
-      
+        let added = [];
+        let updated = [];
+        let deleted = [];
+
+        newTodos.forEach( todo => {
+          const oldTodoIndex = oldTodoState.find(
+            (ele) => ele.id === todo.id
+          );
+
+          if(oldTodoState == -1)
+            added.push(todo);
+          else {
+            const oldTodo = oldTodoState[oldTodoIndex];
+            if(oldTodo.title != todo.title || oldTodo.description != todo.description)
+              updated.push({ oldTodo,todo });
+          }
+        });
+
+        oldTodoState.forEach( oldTodo => {
+          const isDeletd = newTodos.every(
+            (ele) => ele.id !== oldTodo.id
+          );
+          if(isDeletd)
+            deleted.push(oldTodo);
+        });
+
+        added.forEach(addTodoToDom);
+        updated.forEach( ({oldTodo, newTodo}) => {
+          updateTodoInDom({oldTodo,newTodo});
+        });
+        deleted.forEach(removeTodoFromDom);
+        oldTodoState = [...newTodos];
       }
 
       function deleteTodoFromState(id) {
