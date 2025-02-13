@@ -101,7 +101,10 @@
       }
 
       function deleteTodoFromState(id) {
-      
+        const index = todoState.findIndex((todo) => todo.id === id);
+        if (index !== -1) {
+          todoState.splice(index, 1);
+        }
       }
 
       function editTodo() {
