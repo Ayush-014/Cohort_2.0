@@ -108,11 +108,42 @@
       }
 
       function editTodo() {
-      
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+
+        if (editTodoId !== undefined) {
+          const index = todoState.findIndex((todo) => todo.id === editTodoId);
+          if (index !== -1 && (title || description)) {
+            const editedTodo = {
+              id: editTodoId,
+              title: title || todoState[index].title,
+              description: description || todoState[index].description,
+            };
+            todoState[index] = editedTodo;
+            updateState(todoState);
+
+            document.getElementById("title").value = "";
+            document.getElementById("description").value = "";
+            editTodoId = undefined;
+          }
+        }
       }
 
       function addTodo() {
-      
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        if (title || description) {
+          const newTodo = {
+            title: title || "Untitled",
+            description: description || "",
+            id: globalId++,
+          };
+          todoState.push(newTodo);
+          updateState(todoState);
+
+          document.getElementById("title").value = "";
+          document.getElementById("description").value = "";
+        }
       }
     </script>
   </head>
