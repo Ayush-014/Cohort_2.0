@@ -11,7 +11,7 @@ export function Assignment1() {
     for(let i=1; i<=input; i++)
       value *= i;
     return value;
-  })
+  },[input])
   // Your solution ends here
 
   return (
