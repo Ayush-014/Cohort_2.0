@@ -8,7 +8,23 @@ export function Assignment1() {
   const [count, setCount] = useState(0);
 
   // Your code starts here
+  const handleDecrement = useCallback(() => {
+    setCount((prevCount) => prevCount-1);
+  },[]);
+
+  const handleIncrement = useCallback(() => {
+    setCount((prevCount) => prevCount+1);
+  },[]);
   
+  // method-2 
+  // const handleDecrement = useCallback(() => {
+  //   setCount(count-1);
+  // },[count]);
+  
+  // const handleIncrement = useCallback(() => {
+  //   setCount(count+1);
+  // },[count]);
+
   // Your code ends here
 
   return (
