@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { lazy, Suspense } from 'react';
 // import './App.css'
-import {BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom'
-import Dashboard from './components/Dashboard'
-import Home from './components/Home'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+const Dashboard = lazy(() => import('./components/Dashboard'));
+const Home = lazy(() => import('./components/Home'));
 
 function App() {
   // const navigate = useNavigate(); {/** this hook can only be invoked inside <BrowserRouter> component */}
@@ -41,10 +41,12 @@ function App() {
 
       <BrowserRouter>
         <AppBar />  {/* all the prevoius logic(just above comment i.e. 3rd one) is now wrapped inside a function to put it inside <BrowserRouter> component */}
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/home" element={<Home />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </div>
   )
@@ -52,19 +54,19 @@ function App() {
 
 function AppBar() {
   const navigate = useNavigate();
-  
-  return  <div>
-  <button onClick={() => {
-    navigate("/home");
-  }}>
-    Home
-  </button>
-  <button onClick={() => {
-    navigate("/dashboard");
-  }}>
-    Dashboard
-  </button>
-</div>
+
+  return <div>
+    <button onClick={() => {
+      navigate("/home");
+    }}>
+      Home
+    </button>
+    <button onClick={() => {
+      navigate("/dashboard");
+    }}>
+      Dashboard
+    </button>
+  </div>
 }
 
 export default App
