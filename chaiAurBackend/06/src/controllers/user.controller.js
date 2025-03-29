@@ -76,6 +76,7 @@ const registerUser = asyncHandler( async (req,res) => {
             200,
             createdUser,
             "User created Successfully"
+            
         )
     )
 })
