@@ -1,25 +1,24 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit'
+import {createSlice, nanoid } from '@reduxjs/toolkit';
 
 const initialState = {
-    todos: [{
-        id: 1,
-        text: "Hello world"
-    }]
+    todos: [{id: 1, text: "Hello world"}]
 }
+
+
 
 export const todoSlice = createSlice({
     name: 'todo',
-    initialState ,
+    initialState,
     reducers: {
-        addTodo: (state,action) => {
+        addTodo: (state, action) => {
             const todo = {
-                id: nanoid(),
-                text: action.payload.text
+                id: nanoid(), 
+                text: action.payload
             }
+            state.todos.push(todo)
         },
-        removeTodo: (state,action) => {  //state-> jo bhi current state hai; action-> jo bhi data pass hua h
-            state.todos = state.todos.filter(() => 
-            id != action.payload )
+        removeTodo: (state, action) => {    //state-> jo bhi current state hai; action-> jo bhi data pass hua h
+            state.todos = state.todos.filter((todo) => todo.id !== action.payload )
         },
     }
 })
@@ -28,6 +27,5 @@ export const todoSlice = createSlice({
 export const {addTodo, removeTodo} = todoSlice.actions
 
 //sare reducers ko bhi export krna pdega
-export default todoSlice.reducers
-
+export default todoSlice.reducer
 //both of above exports are mandatory
