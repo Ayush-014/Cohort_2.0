@@ -23,6 +23,7 @@ function Protected({
         } else if(!authentication && authStatus !== authentication) {
             navigate("/")
         }
+        setLoader(false)
     }, [authStatus, navigate, authentication])
     return loader ? <h1> loading... </h1> : <> {children} </>
 }

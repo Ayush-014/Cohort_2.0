@@ -8,8 +8,10 @@ import Signup from './Signup.jsx'
 import Login from './Login.jsx'
 import PostCard from './PostCard.jsx'
 import PostForm from './postForm/PostForm.jsx'
-import Container from "./container/Container.jsx"
 import AuthLayout from "./AuthLayout.jsx"
+import Input from './Input.jsx'
+import Select from './Select.jsx'
+import Button from './Button.jsx'
 
 export {
     Header,
@@ -22,6 +24,8 @@ export {
     Login,
     PostCard,
     PostForm,
-    Container,
-    AuthLayout
+    AuthLayout,
+    Input,
+    Button,
+    Select
 }
