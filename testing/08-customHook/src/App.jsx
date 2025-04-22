@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
+import Debouncing from './hooks/debouncing/Debouncing'
+import DeferredValue from './hooks/useDeferredValue/DeferredValue'
 
 function App() {
   const [render, setRender] = useState(true)
@@ -13,6 +15,8 @@ function App() {
   return (
     <>
      { render ? <MyComponent /> : <div></div>}
+     {/* <Debouncing duration={1500} /> */}
+     {/* <DeferredValue /> */}
     </>
   )
 }
