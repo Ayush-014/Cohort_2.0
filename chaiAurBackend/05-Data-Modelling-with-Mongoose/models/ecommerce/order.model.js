@@ -21,7 +21,7 @@ const orderSchema = new mongoose.Schema({
     ref: 'User',
   },
   orderItem: {
-    type: [orderItemSchema],
+    type: [orderItemsSchema],
   },
   address: {
     type: String,
