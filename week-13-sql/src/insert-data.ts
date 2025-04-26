@@ -13,6 +13,11 @@ async function createEntries() {
     console.log("Entries created!");
 }
 
-
-
 createEntries();
+
+// You are using parameterized queries (with $1, $2, etc.).
+// This means the values are not directly concatenated into the SQL string, so PostgreSQL treats them strictly as values.
+// This prevents any malicious input from altering the query structure.
+
+// SQL Injection is NOT being used in your code.
+// You're using best practices with parameterized queries via pg module in Node.js, which protects against SQL injection.

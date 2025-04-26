@@ -1,0 +1,1 @@
+psql -h dpg-d058itk9c44c738g3240-a -p 5432 -U postgressql_puii_user -d postgressql_puii
