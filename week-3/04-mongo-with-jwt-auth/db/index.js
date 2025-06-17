@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const MongoUrl = "mongodb+srv://ayush014:ri2UQp2xRHG5cjIt@cluster0.tzfecbn.mongodb.net/courseSellingApp";
+const MongoUrl = "";
 
 try{
     mongoose.connect(MongoUrl)

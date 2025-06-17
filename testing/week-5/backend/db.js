@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 console.log("Connecting to mongoDB...........");
-mongoose.connect('mongodb+srv://ayush014:ri2UQp2xRHG5cjIt@cluster0.tzfecbn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('', {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true
 }).then(() => {
